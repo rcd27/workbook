@@ -1,0 +1,56 @@
+private static void rearrenge(String[] words, int n) {
+    if (n == 0) {
+      return;
+    }
+
+    Map<Set<Character>, ArrayList<String>> map = new LinkedHashMap<>();
+    for (String str : words) {
+
+      char[] arr = new char[26];
+      for (int i = 0; i < str.length(); i++) {
+        arr[str.charAt(i) - 'a']++;
+      }
+
+      Set<Character> uniqueSet = new HashSet<>();
+      for (char c : str.toCharArray()) {
+        if (!map.containsKey(uniqueSet)) {
+          uniqueSet.add(c);
+        } else {
+          break;
+        }
+      }
+
+      if (map.containsKey(uniqueSet)) {
+        map.get(uniqueSet).add(str);
+      } else {
+        ArrayList<String> al = new ArrayList<>();
+        al.add(str);
+        map.put(uniqueSet, al);
+      }
+    }
+
+    Set<Entry<Set<Character>, ArrayList<String>>> entries = map.entrySet();
+    /*
+    for (Entry<Set<Character>, ArrayList<String>> entry : entries) { для каждого entry
+      System.out.println();
+      ArrayList<String> value = entry.getValue();
+      for (String s : value) {
+        System.out.print(s + ",");
+      }
+      System.out.print(" ");
+    }
+    */
+
+    Iterator<Entry<Set<Character>, ArrayList<String>>> iterator = entries.iterator();
+    while (iterator.hasNext()) {
+      Entry<Set<Character>, ArrayList<String>> next = iterator.next();
+      List<String> entryValue = next.getValue();
+      int listSize = entryValue.size();
+      for (int i = 0; i < listSize; i++) {
+        System.out.print(entryValue.get(i) + ",");
+        if (i == listSize - 1 && iterator.hasNext()) {
+          System.out.print(" \n");
+        }
+      }
+    }
+  }
