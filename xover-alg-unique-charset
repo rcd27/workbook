@@ -1,7 +1,4 @@
 private static void rearrange(String[] words, int n) {
-    if (n == 0) {
-      return;
-    }
 
     Map<Set<Character>, ArrayList<String>> map = new LinkedHashMap<>();
     for (String str : words) {
