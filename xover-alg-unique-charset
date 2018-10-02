@@ -24,10 +24,10 @@ private static void rearrange(String[] words, int n) {
     Set<Entry<Set<Character>, ArrayList<String>>> entries = map.entrySet();
 
     for (Entry<Set<Character>, ArrayList<String>> entry : entries) {
-      System.out.println();
       ArrayList<String> value = entry.getValue();
       for (String s : value) {
         System.out.print(s + ",");
       }
+      System.out.println();
     }
   }
