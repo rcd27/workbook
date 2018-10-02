@@ -1,10 +1,10 @@
-private static void rearrenge(String[] words, int n) {
+private static void rearrange(String[] elements, int n) {
     if (n == 0) {
       return;
     }
 
     Map<Set<Character>, ArrayList<String>> map = new LinkedHashMap<>();
-    for (String str : words) {
+    for (String str : elements) {
 
       char[] arr = new char[26];
       for (int i = 0; i < str.length(); i++) {
@@ -30,27 +30,12 @@ private static void rearrenge(String[] words, int n) {
     }
 
     Set<Entry<Set<Character>, ArrayList<String>>> entries = map.entrySet();
-    /*
-    for (Entry<Set<Character>, ArrayList<String>> entry : entries) { для каждого entry
+
+    for (Entry<Set<Character>, ArrayList<String>> entry : entries) {
       System.out.println();
       ArrayList<String> value = entry.getValue();
       for (String s : value) {
         System.out.print(s + ",");
-      }
-      System.out.print(" ");
-    }
-    */
-
-    Iterator<Entry<Set<Character>, ArrayList<String>>> iterator = entries.iterator();
-    while (iterator.hasNext()) {
-      Entry<Set<Character>, ArrayList<String>> next = iterator.next();
-      List<String> entryValue = next.getValue();
-      int listSize = entryValue.size();
-      for (int i = 0; i < listSize; i++) {
-        System.out.print(entryValue.get(i) + ",");
-        if (i == listSize - 1 && iterator.hasNext()) {
-          System.out.print(" \n");
-        }
       }
     }
   }
