@@ -1,0 +1,44 @@
+class LearningHamcrestTest {
+    @Test
+    fun testEquals() {
+        val biscuit = Biscuit("Ginger", 10)
+        val secondBiscuit = Biscuit("Ginger", 5)
+        assertThat(biscuit, not(equalTo(secondBiscuit)))
+        assertThat("nuts", biscuit.nuts, equalTo(10))
+    }
+
+    @Test
+    fun anyBiscuitsInArray() {
+        val x = listOf("Трюнь", Biscuit("Chocolate", 10), 255, Biscuit("Shady", 100))
+        assertThat(x, CoreMatchers.hasItem(Biscuit("Chocolate", 10)))
+        assertThat(x,CoreMatchers.hasItem(any(Biscuit::class.java)))
+        assertThat(x,CoreMatchers.hasItem(any(Float::class.java)))
+    }
+
+    @Test
+    fun customCheck() {
+        val x = Biscuit("Cocoa",10)
+        assertThat(x, `is`(notANumber()))
+    }
+}
+
+class NotANumber : TypeSafeMatcher<Any>() {
+    override fun describeTo(description: Description?) {
+        description?.appendText("not a number")
+    }
+
+    override fun matchesSafely(item: Any): Boolean {
+        return item !is Double || item !is Int || item !is Float
+    }
+
+    companion object {
+        @Factory
+        fun notANumber(): NotANumber {
+            return NotANumber()
+        }
+    }
+}
+
+data class Biscuit(val s: String, val nuts: Int)
+
+// see more examples: https://www.leveluplunch.com/java/examples/#java-hamcrest
