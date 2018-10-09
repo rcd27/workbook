@@ -8,9 +8,7 @@ private static void rearrange(String[] words, int n) {
 
       if (map.containsKey(uniqueSet)) {
         String oldValue = map.get(uniqueSet);
-        if (!oldValue.equals(words[i]+",")) {
-          map.put(uniqueSet, oldValue + words[i] + ",");
-        }
+        map.put(uniqueSet, oldValue + words[i] + ",");
       } else {
         map.put(uniqueSet, words[i] + ",");
       }
