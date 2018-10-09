@@ -3,15 +3,16 @@ private static void rearrange(String[] words, int n) {
     for (int i = 0; i < n; i++) {
       Set<Character> uniqueSet = new HashSet<>();
       for (char c : words[i].toCharArray()) {
-        if (!map.containsKey(uniqueSet)) {
-          uniqueSet.add(c);
+        uniqueSet.add(c);
       }
 
       if (map.containsKey(uniqueSet)) {
-        String oldSet = map.get(uniqueSet);
-        map.put(uniqueSet, oldSet + words[i] + ",");
+        String oldValue = map.get(uniqueSet);
+        if (!oldValue.equals(words[i]+",")) {
+          map.put(uniqueSet, oldValue + words[i] + ",");
+        }
       } else {
-        map.put(uniqueSet, words[i]+ ",");
+        map.put(uniqueSet, words[i] + ",");
       }
     }
 
