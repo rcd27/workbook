@@ -5,9 +5,6 @@ private static void rearrange(String[] words, int n) {
       for (char c : words[i].toCharArray()) {
         if (!map.containsKey(uniqueSet)) {
           uniqueSet.add(c);
-        } else {
-          break;
-        }
       }
 
       if (map.containsKey(uniqueSet)) {
