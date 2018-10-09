@@ -1,9 +1,5 @@
 private static void rearrange(String[] words, int n) {
-    if (!(n >= 0)) {
-      return;
-    }
-
-    Map<Set<Character>, ArrayList<String>> map = new LinkedHashMap<>();
+    Map<Set<Character>, String> map = new LinkedHashMap<>();
     for (int i = 0; i < n; i++) {
       Set<Character> uniqueSet = new HashSet<>();
       for (char c : words[i].toCharArray()) {
@@ -15,21 +11,14 @@ private static void rearrange(String[] words, int n) {
       }
 
       if (map.containsKey(uniqueSet)) {
-        map.get(uniqueSet).add(words[i]);
+        String oldSet = map.get(uniqueSet);
+        map.put(uniqueSet, oldSet + words[i] + ",");
       } else {
-        ArrayList<String> al = new ArrayList<>();
-        al.add(words[i]);
-        map.put(uniqueSet, al);
+        map.put(uniqueSet, words[i]+ ",");
       }
     }
 
-    Set<Entry<Set<Character>, ArrayList<String>>> entries = map.entrySet();
-
-    for (Entry<Set<Character>, ArrayList<String>> entry : entries) {
-      ArrayList<String> value = entry.getValue();
-      for (String s : value) {
-        System.out.print(s + ",");
-      }
-      System.out.println();
+    for (Entry<Set<Character>, String> setStringEntry : map.entrySet()) {
+      System.out.println(setStringEntry.getValue());
     }
   }
