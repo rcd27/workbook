@@ -1,0 +1,20 @@
+void hideKeyboard() {
+    try {
+      (getActivity()).getWindow()
+          .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+      View currentFocus = getActivity().getCurrentFocus();
+      IBinder windowToken = currentFocus.getWindowToken();
+      if ((currentFocus != null) && (
+          windowToken != null)) {
+        ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE))
+            .hideSoftInputFromWindow(windowToken, 0);
+      }
+    } catch (Exception e) {
+      Timber.e(e);
+    }
+  }
+
+  void showKeyboard() {
+    ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE))
+        .toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+  }
